@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import style from "./LockPanel.module.scss";
 import clsx from "clsx";
 
@@ -8,6 +8,8 @@ interface IProps {
 
 const LockPanel = (props: IProps) => {
   const { unlockPage } = props;
+
+  const [lock, setLock] = useState(false);
 
   const dragBtnRef = useRef<HTMLDivElement | null>(null);
   const dropZoneRef = useRef<HTMLDivElement | null>(null);
@@ -83,6 +85,7 @@ const LockPanel = (props: IProps) => {
       ) {
         dragBtn.style.transform = `translate3d(224px, 0px, 0px)`;
         unlockPage(false);
+        setLock(true);
       } else {
         dragBtn.style.transform = "";
       }
@@ -96,7 +99,10 @@ const LockPanel = (props: IProps) => {
         <div className={style.name}>Жахонгир и Ляззат</div>
         <div className={style.unlockMessage}>Разблокируйте приглашение:</div>
 
-        <div className={clsx(style.drag)} ref={dragRef}>
+        <div
+          className={clsx(style.drag, lock && style.drag_blur)}
+          ref={dragRef}
+        >
           <div
             ref={dragBtnRef}
             className={style.dragButton}

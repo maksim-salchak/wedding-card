@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import style from "./App.module.css";
 import { LockPanel } from "./common";
+import { MainPage } from "./pages";
 
 const App = () => {
   const [lock, setLock] = useState(true);
@@ -11,11 +12,11 @@ const App = () => {
       {lock ? (
         <LockPanel
           unlockPage={(value) => {
-            setLock(value);
+            setTimeout(() => setLock(value), 2400);
           }}
         />
       ) : (
-        <span>You're welcome</span>
+        <MainPage />
       )}
     </div>
   );

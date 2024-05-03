@@ -1,0 +1,63 @@
+@use "src/assets/styles/breakpoints.module";
+
+.mainPage {
+  animation: fadeIn 2s forwards;
+  opacity: 1;
+}
+
+.introSection {
+  height: 750px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 90px;
+  padding: 100px 0;
+  font-family: "Felidae-Regular";
+
+  background-color: #e1d2d2;
+  color: #000000;
+}
+
+.dateWrapper {
+  height: 260px;
+  display: flex;
+}
+
+.date {
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+}
+
+.dateNumber {
+  font-size: 62px;
+}
+
+.saveDate {
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 8px;
+
+  font-size: 32px;
+  color: #8c8986;
+  border-left: 1px solid #333;
+}
+
+.married {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 62px;
+  align-items: center;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
