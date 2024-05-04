@@ -8,17 +8,17 @@
   height: 100vh;
   padding-bottom: 60px;
 
-  background: center no-repeat
-      url(../../assets/photo/103045BA-BA4D-4495-A85B-462AAF0C08F7.png),
-    #1a1919 10%;
+  background: rgba(0, 0, 0, 0.329);
+}
 
-  background-size: cover;
-
-  background-position: 100% 80%;
-
-  @include breakpoints.desktopScreen {
-    background-position: center;
-  }
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -100;
+  object-fit: cover;
 }
 
 .content {

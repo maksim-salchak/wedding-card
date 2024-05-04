@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import style from "./LockPanel.module.scss";
 import clsx from "clsx";
+import videoBg from "../../assets/video/video.mp4";
 
 interface IProps {
   unlockPage: (value: boolean) => void;
@@ -93,27 +94,33 @@ const LockPanel = (props: IProps) => {
   };
 
   return (
-    <div className={style.lockPanel}>
-      <div className={style.content}>
-        <div className={style.title}>wedding day</div>
-        <div className={style.name}>Жахонгир и Ляззат</div>
-        <div className={style.unlockMessage}>Разблокируйте приглашение:</div>
+    <>
+      <div className={style.lockPanel}>
+        <div className={style.content}>
+          <div className={style.title}>wedding day</div>
+          <div className={style.name}>Жахонгир и Ляззат</div>
+          <div className={style.unlockMessage}>Разблокируйте приглашение:</div>
 
-        <div
-          className={clsx(style.drag, lock && style.drag_blur)}
-          ref={dragRef}
-        >
           <div
-            ref={dragBtnRef}
-            className={style.dragButton}
-            onMouseDown={handleStart}
-            onTouchStart={handleStart}
-          ></div>
-          <div className={style.dragLine}></div>
-          <div ref={dropZoneRef} className={style.dropZone}></div>
+            className={clsx(style.drag, lock && style.drag_blur)}
+            ref={dragRef}
+          >
+            <div
+              ref={dragBtnRef}
+              className={style.dragButton}
+              onMouseDown={handleStart}
+              onTouchStart={handleStart}
+            ></div>
+            <div className={style.dragLine}></div>
+            <div ref={dropZoneRef} className={style.dropZone}></div>
+          </div>
         </div>
       </div>
-    </div>
+
+      <video muted loop className={style.video} autoPlay>
+        <source src={videoBg} type="video/mp4" />
+      </video>
+    </>
   );
 };
 

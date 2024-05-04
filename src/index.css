@@ -9,6 +9,14 @@
   font-weight: 400;
 }
 
+@font-face {
+  font-family: "Сleanvertising";
+  src: url("assets/fonts/cleanvertising-light.woff2") format("woff2"),
+    url("assets/fonts/cleanvertising-light.woff") format("woff");
+  font-style: normal;
+  font-weight: 300;
+}
+
 * {
   box-sizing: border-box;
 }
