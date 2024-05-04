@@ -127,7 +127,7 @@
 .date {
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
-  font-size: 48px;
+  font-size: 32px;
   white-space: nowrap;
 
   @include breakpoints.customScreenWidth(620px) {
@@ -137,6 +137,10 @@
   @include breakpoints.customScreenWidth(375px) {
     font-size: 26px;
   }
+}
+
+.date {
+  font-size: 52px;
 }
 
 .guestText,
@@ -260,5 +264,104 @@
 
   @include breakpoints.customScreenWidth(375px) {
     width: 120px;
+  }
+}
+
+.location {
+  min-height: 750px;
+  height: 100%;
+  background: #e1d2d2;
+  color: #000000;
+  padding: 60px 0;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
+}
+
+.locationTitleWrapper {
+  position: relative;
+  padding: 30px 0;
+}
+
+.locationTitle {
+  font-family: "Karlotte";
+  font-size: 62px;
+  text-transform: uppercase;
+}
+
+.locationSubtitle {
+  position: absolute;
+  top: 56px;
+  right: 64px;
+
+  font-family: "Lovers Quarrel";
+  font-style: italic;
+  font-size: 84px;
+  color: #c5c1bcc7;
+
+  transform: rotate(-4deg);
+}
+
+.photo3Wrapper {
+  position: relative;
+
+  transform: rotate(-8deg);
+
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    z-index: -1;
+    width: 290px;
+    height: 100%;
+
+    background: #c5c1bc93;
+    transform: rotate(-8deg);
+    border-radius: 10px;
+    transition: transform 0.5s linear;
+
+    @include breakpoints.mobileLargeScreen {
+      width: 230px;
+    }
+  }
+
+  &:hover .photo3 {
+    transform: scale(1.05);
+  }
+
+  &:hover::after {
+    transform: rotate(-10deg);
+  }
+}
+
+.photo3 {
+  display: block;
+  width: 280px;
+  border-radius: 10px;
+  transition: transform 0.5s linear;
+
+  @include breakpoints.mobileLargeScreen {
+    width: 220px;
+  }
+}
+
+.locationContent {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  text-align: center;
+}
+
+.locationLink {
+  text-transform: uppercase;
+  text-decoration: underline;
+  color: inherit;
+  user-select: none;
+
+  &:focus {
+    outline: none;
   }
 }

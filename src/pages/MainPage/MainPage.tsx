@@ -4,6 +4,7 @@ import { USER_NAMES, UserPath } from "shared";
 
 import photo1 from "../../assets/photo/1.png";
 import photo2 from "../../assets/photo/2.png";
+import glass from "../../assets/photo/glass.jpg";
 
 import styles from "./MainPage.module.scss";
 
@@ -60,6 +61,33 @@ const MainPage = () => {
               alt="Жахонгир и Ляззат"
             />
           </div>
+        </div>
+      </section>
+
+      <section className={styles.location}>
+        <div className={styles.photo3Wrapper}>
+          <img className={styles.photo3} src={glass} alt="Жахонгир и Ляззат" />
+        </div>
+
+        <div className={styles.locationTitleWrapper}>
+          <div className={styles.locationTitle}>Location</div>
+          <div className={styles.locationSubtitle}>for you</div>
+        </div>
+
+        <div className={styles.locationContent}>
+          <span>Ждем вас по адресу:</span>
+
+          <span>г.Петропавловск, ул Конституции Казахстанна, 41</span>
+          <span>ресторан "Brown Street"</span>
+
+          <a
+            className={styles.locationLink}
+            href="https://yandex.ru/maps/org/brown_street/145179315896/?ll=69.138207%2C54.862834&z=14"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Перейти на карту
+          </a>
         </div>
       </section>
     </div>
