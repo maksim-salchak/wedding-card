@@ -4,14 +4,18 @@ import { USER_NAMES, UserPath } from "shared";
 
 import photo1 from "../../assets/photo/1.png";
 import photo2 from "../../assets/photo/2.png";
+import photo5 from "../../assets/photo/5.png";
 import glass from "../../assets/photo/glass.jpg";
 
 import styles from "./MainPage.module.scss";
+import clsx from "clsx";
 
 const MainPage = () => {
   const location = useLocation();
 
   const guest = USER_NAMES[location.pathname as UserPath];
+
+  const dressCodeExample = ["#DDDCDB", "#B8B0A0", "#96825F", "#181818"];
 
   return (
     <div className={styles.mainPage}>
@@ -65,13 +69,17 @@ const MainPage = () => {
       </section>
 
       <section className={styles.location}>
-        <div className={styles.photo3Wrapper}>
-          <img className={styles.photo3} src={glass} alt="Жахонгир и Ляззат" />
+        <div className={styles.rotatePhoto}>
+          <img
+            className={styles.photo3}
+            src={glass}
+            alt="Пирамида шампанского"
+          />
         </div>
 
-        <div className={styles.locationTitleWrapper}>
-          <div className={styles.locationTitle}>Location</div>
-          <div className={styles.locationSubtitle}>for you</div>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>Location</div>
+          <div className={styles.subtitle}>for you</div>
         </div>
 
         <div className={styles.locationContent}>
@@ -88,6 +96,70 @@ const MainPage = () => {
           >
             Перейти на карту
           </a>
+        </div>
+      </section>
+
+      <section className={styles.timing}>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>Timing</div>
+          <div className={clsx(styles.subtitle, styles.subtitle_right)}>
+            special
+          </div>
+        </div>
+
+        <div className={styles.timingPointWrapper}>
+          <div className={styles.timingPoint}>17:00</div>
+          <div className={styles.timingPointCaption}>Сбор гостей</div>
+        </div>
+
+        <div className={styles.timingPointWrapper}>
+          <div className={styles.timingPoint}>18:00</div>
+          <div className={styles.timingPointCaption}>Банкет</div>
+        </div>
+
+        <div className={styles.timingPointWrapper}>
+          <div className={styles.timingPoint}>23:00</div>
+          <div
+            className={clsx(
+              styles.timingPointCaption,
+              styles.timingPointCaption_last
+            )}
+          >
+            Свадебный торт
+          </div>
+        </div>
+      </section>
+
+      <section className={styles.dressCode}>
+        <div className={styles.titleWrapper}>
+          <div className={clsx(styles.title, styles.title_left)}>dress</div>
+          <div className={clsx(styles.title, styles.title_break)}>code</div>
+          <div className={clsx(styles.subtitle, styles.subtitle_top)}>your</div>
+        </div>
+
+        <div className={styles.dressCodeText}>
+          Мы очень старались сделать праздник красивым и будем рады, если в
+          своих нарядах вы поддержите цветовую гамму нашей свадьбы
+        </div>
+
+        <div className={styles.dressCodeColors}>
+          {dressCodeExample.map((item) => (
+            <div
+              key={item}
+              className={styles.dressCodeExample}
+              style={{ background: `${item}` }}
+            />
+          ))}
+        </div>
+
+        <div className={styles.rotatePhoto}>
+          <img className={styles.photo3} src={photo5} alt="Жахонгир и Ляззат" />
+        </div>
+      </section>
+
+      <section className={styles.dressCode}>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>Guest form</div>
         </div>
       </section>
     </div>
