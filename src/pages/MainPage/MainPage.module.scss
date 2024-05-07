@@ -444,7 +444,8 @@
   }
 }
 
-.dressCode {
+.dressCode,
+.invited {
   min-height: 750px;
   height: 100%;
   background: #e1d2d2;
@@ -478,4 +479,20 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+
+.invitedCaption {
+  max-width: 320px;
+  text-align: center;
+}
+
+.test {
+  background: #e1d2d2;
+
+  & > html {
+    display: none;
+  }
+}
+.test html body {
+  opacity: 0 !important;
 }

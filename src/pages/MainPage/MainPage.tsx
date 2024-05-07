@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { USER_NAMES, UserPath } from "shared";
 
@@ -12,8 +12,11 @@ import clsx from "clsx";
 
 const MainPage = () => {
   const location = useLocation();
+  const [submit, setSubmit] = useState(false);
 
-  const guest = USER_NAMES[location.pathname as UserPath];
+  const guest = USER_NAMES[location.pathname as UserPath]
+    ? USER_NAMES[location.pathname as UserPath]
+    : "Дорогие гости!";
 
   const dressCodeExample = ["#DDDCDB", "#B8B0A0", "#96825F", "#181818"];
 
@@ -157,10 +160,114 @@ const MainPage = () => {
         </div>
       </section>
 
-      <section className={styles.dressCode}>
+      <section className={styles.invited}>
         <div className={styles.titleWrapper}>
-          <div className={styles.title}>Guest form</div>
+          <div className={styles.title}>RSVP</div>
+          <div className={clsx(styles.subtitle, styles.subtitle_right)}>
+            invited
+          </div>
         </div>
+        <div className={styles.invitedCaption}>
+          Ваши ответы на вопросы очень помогут нам при организации свадьбы.
+        </div>
+        <div className={styles.invitedCaption}>
+          Будем ждать ответы до 01.06.20204 г.
+        </div>
+
+        <iframe
+          className={styles.test}
+          src="https://docs.google.com/forms/d/e/1FAIpQLSdr829ULvZc1pPPsAmP30vDnG100Yg_pn_6uBfz3oDByLYIdA/viewform?embedded=true"
+          width="500"
+          height={1000}
+        >
+          Загрузка…
+        </iframe>
+
+        {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+        {/* <iframe
+          name="hidden_iframe"
+          id="hidden_iframe"
+          style={{ display: "none" }}
+          onLoad={() => {
+            if (submit) {
+              window.location.replace(
+                "https://docs.google.com/forms/u/0/d/e/1FAIpQLSdr829ULvZc1pPPsAmP30vDnG100Yg_pn_6uBfz3oDByLYIdA/formResponse"
+              );
+            }
+          }} */}
+        {/* /> */}
+
+        {/* <form
+          target="hidden_iframe"
+          action="https://docs.google.com/forms/u/0/d/e/1FAIpQLSdr829ULvZc1pPPsAmP30vDnG100Yg_pn_6uBfz3oDByLYIdA/formResponse"
+          method="POST"
+          onSubmit={() => setSubmit(true)}
+        >
+          <label>
+            <span> Фамилия Имя</span>
+            <input
+              type="text"
+              placeholder="Фамилия Имя"
+              name="entry.2005620554"
+            />
+          </label>
+
+          <label htmlFor="1">
+            <span> Я приду / Мы придем</span>
+            <input
+              id="1"
+              name="entry.1166974658"
+              type="radio"
+              value={"Я приду / Мы придем"}
+            />
+          </label>
+
+          <label htmlFor="2">
+            <span>Скажу ответ позже</span>
+            <input
+              id="2"
+              name="entry.1166974658"
+              type="radio"
+              value={"Скажу ответ позже"}
+            />
+          </label>
+
+          <label htmlFor="3">
+            <span> Прийти не получится</span>
+            <input
+              id="3"
+              name="entry.1166974658"
+              type="radio"
+              value={"Прийти не получится"}
+            />
+          </label>
+
+          <label htmlFor="4">
+            <span>Коньяк</span>
+            <input
+              id="4"
+              name="entry.148622164"
+              type="checkbox"
+              value={"Коньяк"}
+            />
+          </label>
+
+          <label htmlFor="5">
+            <span> Шампанское</span>
+            <input
+              id="5"
+              name="entry.148622164"
+              type="checkbox"
+              value={"Шампанское"}
+            />
+          </label>
+
+          <button
+            data-shuffle-seed="3218404262253044505"
+            type="submit"
+            value="Ответить"
+          />
+        </form> */}
       </section>
     </div>
   );
