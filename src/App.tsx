@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { MainPage } from "./pages";
 
 import style from "./App.module.css";
 import { LockPanel } from "common";
+import { USER_PATH_OPTIONS } from "shared";
 
 const App = () => {
   const [lock, setLock] = useState(true);
@@ -18,7 +19,11 @@ const App = () => {
             }}
           />
         ) : (
-          <MainPage />
+          <Routes>
+            {USER_PATH_OPTIONS.map((item) => (
+              <Route key={item} path={item} element={<MainPage />} />
+            ))}
+          </Routes>
         )}
       </div>
     </BrowserRouter>
