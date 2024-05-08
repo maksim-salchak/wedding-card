@@ -195,63 +195,124 @@ const MainPage = () => {
             invited
           </div>
         </div>
+
         <div className={styles.invitedCaption}>
           Ваши ответы на вопросы очень помогут нам при организации свадьбы.
         </div>
+
         <div className={styles.invitedCaption}>
           Будем ждать ответы до 01.06.20204 г.
         </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.form}>
           <label>
-            <span> Фамилия Имя</span>
-            <input type="text" placeholder="Фамилия Имя" name="name" required />
+            <div className={styles.formNameWrapper}>
+              <span className={styles.formBlockTitle}>Фамилия Имя</span>
+
+              <span className={styles.formBlockCaption}>
+                если вы будете с парой или семьей, внесите все имена, а также
+                возраст детей
+              </span>
+
+              <input
+                type="text"
+                placeholder="Фамилия Имя"
+                name="name"
+                required
+                className={styles.formNameInput}
+                autoComplete="off"
+              />
+              <span className={styles.formNameInput__line} />
+            </div>
           </label>
 
-          <label htmlFor="1">
-            <input
-              id="1"
-              name="conform"
-              type="radio"
-              required
-              value={"Я приду / Мы придем"}
-            />
-            <span>Я приду / Мы придем</span>
-          </label>
+          <div className={styles.formBlockWrapper}>
+            <span className={styles.formBlockTitle}>Присутствие</span>
 
-          <label htmlFor="2">
-            <input
-              id="2"
-              name="conform"
-              type="radio"
-              required
-              value={"Скажу ответ позже"}
-            />
-            <span>Скажу ответ позже</span>
-          </label>
+            <label htmlFor="1" className={styles.radioBox}>
+              <input
+                className={styles.radioBox__input}
+                id="1"
+                name="conform"
+                type="radio"
+                required
+                value={"Я приду / Мы придем"}
+              />
+              <span className={styles.radioBox__fake} />
+              <span className={styles.radioBox__text}>Я приду / Мы придем</span>
+            </label>
 
-          <label htmlFor="3">
-            <span> Прийти не получится</span>
-            <input
-              id="3"
-              name="conform"
-              type="radio"
-              required
-              value={"Прийти не получится"}
-            />
-          </label>
+            <label htmlFor="2" className={styles.radioBox}>
+              <input
+                className={styles.radioBox__input}
+                id="2"
+                name="conform"
+                type="radio"
+                required
+                value={"Скажу ответ позже"}
+              />
+              <span className={styles.radioBox__fake} />
+              <span className={styles.radioBox__text}>Скажу ответ позже</span>
+            </label>
 
-          <label htmlFor="4">
-            <input id="4" name="drink" type="checkbox" value={"Коньяк"} />
-            <span>Коньяк</span>
-          </label>
+            <label htmlFor="3" className={styles.radioBox}>
+              <input
+                className={styles.radioBox__input}
+                id="3"
+                name="conform"
+                type="radio"
+                required
+                value={"Прийти не получится"}
+              />
+              <span className={styles.radioBox__fake} />
+              <span className={styles.radioBox__text}>Прийти не получится</span>
+            </label>
+          </div>
 
-          <label htmlFor="5">
-            <input id="5" name="drink1" type="checkbox" value={"Шампанское"} />
-            <span> Шампанское</span>
-          </label>
+          <div className={styles.formBlockWrapper}>
+            <span className={styles.formBlockTitle}>Напитки</span>
 
-          <button className={styles.linkForm} type="submit">
+            <label htmlFor="4" className={styles.checkBox}>
+              <input
+                className={styles.checkBox__input}
+                id="4"
+                name="drink"
+                type="checkbox"
+                value={"Коньяк"}
+              />
+              <span className={styles.checkBox__fake} />
+              <span className={styles.checkBox__text}>Коньяк</span>
+            </label>
+
+            <label htmlFor="5" className={styles.checkBox}>
+              <input
+                className={styles.checkBox__input}
+                id="5"
+                name="drink1"
+                type="checkbox"
+                value={"Шампанское"}
+              />
+              <span className={styles.checkBox__fake} />
+              <span className={styles.checkBox__text}>Шампанское</span>
+            </label>
+
+            <label htmlFor="6" className={styles.checkBox}>
+              <input
+                className={styles.checkBox__input}
+                id="6"
+                name="drink2"
+                type="checkbox"
+                value={"Шампанское"}
+              />
+              <span className={styles.checkBox__fake} />
+              <span className={styles.checkBox__text}>Другие напитки..</span>
+            </label>
+          </div>
+
+          <button
+            className={clsx(styles.linkForm, styles.linkForm_submit)}
+            type="submit"
+          >
             Ответить
           </button>
         </form>

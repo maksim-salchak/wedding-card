@@ -57,7 +57,7 @@ const LockPanel = (props: IProps) => {
       dragBtn.style.transform = `translate3d(${offsetX - 10}px, 0px, 0px)`;
 
       if (offsetX > 224) {
-        dragBtn.style.transform = `translate3d(224px, 0px, 0px)`;
+        dragBtn.style.transform = `translate3d(225px, 0px, 0px)`;
       }
       if (offsetX < -10) {
         dragBtn.style.transform = `translate3d(-10px, 0px, 0px)`;
@@ -84,7 +84,7 @@ const LockPanel = (props: IProps) => {
         dragRect.top <= dropRect.bottom &&
         dragRect.bottom >= dropRect.top
       ) {
-        dragBtn.style.transform = `translate3d(224px, 0px, 0px)`;
+        dragBtn.style.transform = `translate3d(225px, 0px, 0px)`;
         unlockPage(false);
         setLock(true);
       } else {
