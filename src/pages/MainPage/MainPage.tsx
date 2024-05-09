@@ -1,4 +1,4 @@
-import React, { MutableRefObject, useRef } from "react";
+import React, { MutableRefObject, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GOOGLE_TABLE_LINK, USER_NAMES, UserPath } from "shared";
 
@@ -10,8 +10,17 @@ import glass from "../../assets/photo/glass.jpg";
 import styles from "./MainPage.module.scss";
 import clsx from "clsx";
 
-const MainPage = () => {
+interface IProps {
+  muteBtn: React.ReactNode;
+}
+
+const MainPage = (props: IProps) => {
+  const { muteBtn } = props;
   const location = useLocation();
+  const inviteRef = useRef<HTMLElement | null>(null);
+  const [sended, setSended] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const guest = USER_NAMES[location.pathname as UserPath]
     ? USER_NAMES[location.pathname as UserPath]
@@ -19,29 +28,32 @@ const MainPage = () => {
 
   const dressCodeExample = ["#DDDCDB", "#B8B0A0", "#96825F", "#181818"];
 
-  const inviteRef = useRef<HTMLElement | null>(null);
-
   const scrollToSection = (ref: MutableRefObject<HTMLElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
+
     const formData = new FormData(event.target);
+    const name = formData.get("name");
+    const confirm = formData.get("confirm");
+    const drink = formData.getAll("drink");
 
     try {
+      setLoading(true);
+
       const response = await fetch(GOOGLE_TABLE_LINK, {
         method: "POST",
-        mode: "no-cors",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: formData,
+        body: JSON.stringify({ guest: guest, name, confirm, drink }),
       });
 
-      console.log(response);
+      if (response.status === 200) setSended(true);
     } catch (e) {
       console.error(e);
+      setError(true);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -201,122 +213,152 @@ const MainPage = () => {
         </div>
 
         <div className={styles.invitedCaption}>
-          Будем ждать ответы до 01.06.20204 г.
+          Будем ждать ответы до 01.06.2024 г.
         </div>
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label>
-            <div className={styles.formNameWrapper}>
-              <span className={styles.formBlockTitle}>Фамилия Имя</span>
-
-              <span className={styles.formBlockCaption}>
-                если вы будете с парой или семьей, внесите все имена, а также
-                возраст детей
-              </span>
-
-              <input
-                type="text"
-                placeholder="Фамилия Имя"
-                name="name"
-                required
-                className={styles.formNameInput}
-                autoComplete="off"
-              />
-              <span className={styles.formNameInput__line} />
-            </div>
-          </label>
-
-          <div className={styles.formBlockWrapper}>
-            <span className={styles.formBlockTitle}>Присутствие</span>
-
-            <label htmlFor="1" className={styles.radioBox}>
-              <input
-                className={styles.radioBox__input}
-                id="1"
-                name="conform"
-                type="radio"
-                required
-                value={"Я приду / Мы придем"}
-              />
-              <span className={styles.radioBox__fake} />
-              <span className={styles.radioBox__text}>Я приду / Мы придем</span>
-            </label>
-
-            <label htmlFor="2" className={styles.radioBox}>
-              <input
-                className={styles.radioBox__input}
-                id="2"
-                name="conform"
-                type="radio"
-                required
-                value={"Скажу ответ позже"}
-              />
-              <span className={styles.radioBox__fake} />
-              <span className={styles.radioBox__text}>Скажу ответ позже</span>
-            </label>
-
-            <label htmlFor="3" className={styles.radioBox}>
-              <input
-                className={styles.radioBox__input}
-                id="3"
-                name="conform"
-                type="radio"
-                required
-                value={"Прийти не получится"}
-              />
-              <span className={styles.radioBox__fake} />
-              <span className={styles.radioBox__text}>Прийти не получится</span>
-            </label>
-          </div>
-
-          <div className={styles.formBlockWrapper}>
-            <span className={styles.formBlockTitle}>Напитки</span>
-
-            <label htmlFor="4" className={styles.checkBox}>
-              <input
-                className={styles.checkBox__input}
-                id="4"
-                name="drink"
-                type="checkbox"
-                value={"Коньяк"}
-              />
-              <span className={styles.checkBox__fake} />
-              <span className={styles.checkBox__text}>Коньяк</span>
-            </label>
-
-            <label htmlFor="5" className={styles.checkBox}>
-              <input
-                className={styles.checkBox__input}
-                id="5"
-                name="drink1"
-                type="checkbox"
-                value={"Шампанское"}
-              />
-              <span className={styles.checkBox__fake} />
-              <span className={styles.checkBox__text}>Шампанское</span>
-            </label>
-
-            <label htmlFor="6" className={styles.checkBox}>
-              <input
-                className={styles.checkBox__input}
-                id="6"
-                name="drink2"
-                type="checkbox"
-                value={"Шампанское"}
-              />
-              <span className={styles.checkBox__fake} />
-              <span className={styles.checkBox__text}>Другие напитки..</span>
-            </label>
-          </div>
-
-          <button
-            className={clsx(styles.linkForm, styles.linkForm_submit)}
-            type="submit"
+        {!sended && !error ? (
+          <form
+            onSubmit={handleSubmit}
+            className={clsx(styles.form, loading && styles.form_loading)}
           >
-            Ответить
-          </button>
-        </form>
+            <label>
+              <div className={styles.formNameWrapper}>
+                <span className={styles.formBlockTitle}>{guest}</span>
+
+                <span className={styles.formBlockCaption}>
+                  если вы будете с парой или семьей, внесите все имена, а также
+                  возраст детей
+                </span>
+
+                <input
+                  type="text"
+                  placeholder="Фамилия Имя"
+                  name="name"
+                  required
+                  className={styles.formNameInput}
+                  autoComplete="off"
+                  disabled={loading}
+                />
+                <span className={styles.formNameInput__line} />
+              </div>
+            </label>
+
+            <div className={styles.formBlockWrapper}>
+              <span className={styles.formBlockTitle}>Присутствие</span>
+
+              <label htmlFor="1" className={styles.radioBox}>
+                <input
+                  className={styles.radioBox__input}
+                  id="1"
+                  name="confirm"
+                  type="radio"
+                  required
+                  defaultChecked
+                  value={"Я приду / Мы придем"}
+                  disabled={loading}
+                />
+                <span className={styles.radioBox__fake} />
+                <span className={styles.radioBox__text}>
+                  Я приду / Мы придем
+                </span>
+              </label>
+
+              <label htmlFor="2" className={styles.radioBox}>
+                <input
+                  className={styles.radioBox__input}
+                  id="2"
+                  name="confirm"
+                  type="radio"
+                  required
+                  value={"Скажу ответ позже"}
+                  disabled={loading}
+                />
+                <span className={styles.radioBox__fake} />
+                <span className={styles.radioBox__text}>Скажу ответ позже</span>
+              </label>
+
+              <label htmlFor="3" className={styles.radioBox}>
+                <input
+                  className={styles.radioBox__input}
+                  id="3"
+                  name="confirm"
+                  type="radio"
+                  required
+                  value={"Прийти не получится"}
+                  disabled={loading}
+                />
+                <span className={styles.radioBox__fake} />
+                <span className={styles.radioBox__text}>
+                  Прийти не получится
+                </span>
+              </label>
+            </div>
+
+            <div className={styles.formBlockWrapper}>
+              <span className={styles.formBlockTitle}>Напитки</span>
+
+              <label htmlFor="4" className={styles.checkBox}>
+                <input
+                  className={styles.checkBox__input}
+                  id="4"
+                  name="drink"
+                  type="checkbox"
+                  value={"Коньяк"}
+                  disabled={loading}
+                />
+                <span className={styles.checkBox__fake} />
+                <span className={styles.checkBox__text}>Коньяк</span>
+              </label>
+
+              <label htmlFor="5" className={styles.checkBox}>
+                <input
+                  className={styles.checkBox__input}
+                  id="5"
+                  name="drink"
+                  type="checkbox"
+                  value={"Шампанское"}
+                  disabled={loading}
+                />
+                <span className={styles.checkBox__fake} />
+                <span className={styles.checkBox__text}>Шампанское</span>
+              </label>
+
+              <label htmlFor="6" className={styles.checkBox}>
+                <input
+                  className={styles.checkBox__input}
+                  id="6"
+                  name="drink"
+                  type="checkbox"
+                  value={"Шампанское"}
+                  disabled={loading}
+                />
+                <span className={styles.checkBox__fake} />
+                <span className={styles.checkBox__text}>Другие напитки..</span>
+              </label>
+            </div>
+
+            <button
+              className={clsx(styles.linkForm, styles.linkForm_submit)}
+              type="submit"
+              disabled={loading}
+            >
+              Ответить
+            </button>
+          </form>
+        ) : (
+          <>
+            {!error ? (
+              <div className={styles.invitedCaption}>Спасибо за ваш ответ!</div>
+            ) : (
+              <div className={styles.invitedCaption}>
+                Произошла ошибка отправки формы
+              </div>
+            )}
+          </>
+        )}
       </section>
+
+      {muteBtn}
     </div>
   );
 };
