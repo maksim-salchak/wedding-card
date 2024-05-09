@@ -146,7 +146,7 @@
 .guestText,
 .linkForm {
   font-family: "Сleanvertising";
-
+  text-align: justify;
   font-size: 18px;
 
   @include breakpoints.customScreenWidth(375px) {
