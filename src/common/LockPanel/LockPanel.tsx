@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import style from "./LockPanel.module.scss";
 import clsx from "clsx";
-import videoBg from "../../assets/video/video.mp4";
+import videoBg from "../../assets/video/IMG_2667.mp4";
 
 interface IProps {
   unlockPage: (value: boolean) => void;

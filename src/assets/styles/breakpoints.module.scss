@@ -3,7 +3,7 @@ $laptopScreen: 1440px;
 $tabletLandscapeScreen: 1024px;
 $tabletPortraitScreen: 640px;
 $mobileLargeScreen: 480px;
-$mobileSmallScreen: 320px;
+$mobileSmallScreen: 375px;
 
 @mixin desktopScreen() {
   @media screen and (max-width: $desktopScreen) {

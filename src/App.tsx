@@ -41,13 +41,17 @@ const App = () => {
           />
         ) : (
           <Routes>
-            {USER_PATH_OPTIONS.map((item) => (
-              <Route
-                key={item}
-                path={item}
-                element={<MainPage muteBtn={muteBtn} />}
-              />
-            ))}
+            {USER_PATH_OPTIONS.map((item) => {
+              console.log(item);
+
+              return (
+                <Route
+                  key={item}
+                  path={item}
+                  element={<MainPage muteBtn={muteBtn} />}
+                />
+              );
+            })}
           </Routes>
         )}
 

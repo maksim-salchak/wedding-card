@@ -51,6 +51,10 @@
   gap: 8px;
   font-size: 62px;
   align-items: center;
+
+  @include breakpoints.mobileSmallScreen {
+    font-size: 58px;
+  }
 }
 
 @keyframes fadeIn {
@@ -212,7 +216,7 @@
   transition: transform 0.5s linear;
 
   &:hover {
-    transform: scale(1.2);
+    transform: scale(1.1);
   }
 
   @include breakpoints.laptopScreen {
@@ -250,7 +254,7 @@
   transition: transform 0.5s linear;
 
   &:hover {
-    transform: rotate(-5deg) scale(1.2);
+    transform: rotate(-5deg) scale(1.1);
   }
 
   @include breakpoints.customScreenWidth(1005px) {
@@ -264,7 +268,7 @@
   height: auto;
   user-select: none;
 
-  transform: scale(1.1);
+  transform: scale(1.05);
 
   @include breakpoints.laptopScreen {
     width: 250px;
@@ -317,6 +321,14 @@
     top: 72px;
     left: 59px;
   }
+
+  &_paddingTop {
+    padding-top: 60px;
+  }
+
+  @include breakpoints.mobileSmallScreen {
+    font-size: 56px;
+  }
 }
 
 .subtitle {
@@ -340,6 +352,16 @@
     top: -32px;
     left: -26px;
   }
+
+  &_special {
+    top: 53px;
+    right: 28px;
+    color: #cac5c24a;
+  }
+}
+
+.rotatePhotoWrapper {
+  padding-top: 50px;
 }
 
 .rotatePhoto {
@@ -363,9 +385,13 @@
     @include breakpoints.mobileLargeScreen {
       width: 230px;
     }
+
+    @include breakpoints.mobileSmallScreen {
+      width: 210px;
+    }
   }
 
-  &:hover .photo3 {
+  &:hover .photo5 {
     transform: scale(1.05);
   }
 
@@ -374,7 +400,7 @@
   }
 }
 
-.photo3 {
+.photo5 {
   display: block;
   width: 280px;
   border-radius: 10px;
@@ -462,7 +488,8 @@
 }
 
 .dressCode,
-.invited {
+.invited,
+.details {
   min-height: 750px;
   height: 100%;
   background: #e1d2d2;
@@ -477,26 +504,66 @@
   overflow: hidden;
 }
 
-.dressCodeText {
-  max-width: 320px;
+.details {
+  min-height: auto;
+  padding-bottom: 0;
+
+  gap: 40px;
+  background: #1b1b1b;
+  color: #b7b7b7;
+}
+
+.dressCodeText,
+.dressCodeTextCaption,
+.detailsContent {
+  max-width: 420px;
   padding-top: 10px;
 
   font-family: "Montserrat", sans-serif;
   font-weight: 400;
   text-align: center;
+
+  @include breakpoints.mobileSmallScreen {
+    font-size: 14px;
+  }
+}
+
+.detailsContent {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px;
+  gap: 15px;
+}
+
+.dressCodeTextCaption {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding-top: 0;
+  padding-bottom: 10px;
+  text-align: center;
+}
+
+.strongCaption {
+  font-size: 16px;
+  font-weight: 500;
 }
 
 .dressCodeColors {
   display: flex;
   justify-content: space-between;
   gap: 10px;
-  padding-bottom: 50px;
 }
 
 .dressCodeExample {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+
+  @include breakpoints.mobileSmallScreen {
+    width: 65px;
+    height: 65px;
+  }
 }
 
 .invitedCaption {
@@ -505,13 +572,15 @@
 }
 
 .form {
-  font-family: "Montserrat", sans-serif;
   display: flex;
   flex-direction: column;
 
   gap: 10px;
 
+  width: 100%;
   max-width: 450px;
+
+  font-family: "Montserrat", sans-serif;
   padding: 0px 15px;
 
   &_loading {
@@ -533,6 +602,10 @@
   color: #000000;
   padding: 5px;
   padding-bottom: 0;
+
+  &_paddingBottom {
+    padding-bottom: 20px;
+  }
 }
 
 .formBlockCaption {
@@ -699,5 +772,55 @@
     font-weight: 500;
     font-size: 14px;
     color: #000000;
+  }
+}
+
+.photo3Content {
+  position: relative;
+}
+
+.photo3 {
+  display: block;
+  width: 100%;
+  object-fit: contain;
+  user-select: none;
+}
+
+.photo3Text {
+  position: absolute;
+  top: 2%;
+  left: 30%;
+
+  font-family: "Antarctic";
+  font-size: 98px;
+  color: #000;
+  transform: rotate(350deg);
+  user-select: none;
+
+  @include breakpoints.customScreenWidth(920px) {
+    font-size: 72px;
+  }
+
+  @include breakpoints.customScreenWidth(768px) {
+    font-size: 62px;
+    top: 3%;
+    left: 16%;
+  }
+
+  @include breakpoints.mobileLargeScreen {
+    font-size: 44px;
+    top: 6%;
+    left: 13%;
+  }
+}
+
+.photo3Caption {
+  position: absolute;
+  bottom: 2px;
+  left: 5px;
+  font-size: 10px;
+
+  @include breakpoints.mobileLargeScreen {
+    font-size: 6px;
   }
 }

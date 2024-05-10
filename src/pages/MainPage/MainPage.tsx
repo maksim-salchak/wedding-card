@@ -1,11 +1,15 @@
 import React, { MutableRefObject, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GOOGLE_TABLE_LINK, USER_NAMES, UserPath } from "shared";
+import { WhatsAppIcon } from "common";
 
 import photo1 from "../../assets/photo/1.png";
 import photo2 from "../../assets/photo/2.png";
+import photo3 from "../../assets/photo/3.png";
 import photo5 from "../../assets/photo/5.png";
 import glass from "../../assets/photo/glass.jpg";
+import silver from "../../assets/photo/silver.jpg";
+import gold from "../../assets/photo/gold.jpg";
 
 import styles from "./MainPage.module.scss";
 import clsx from "clsx";
@@ -26,8 +30,6 @@ const MainPage = (props: IProps) => {
     ? USER_NAMES[location.pathname as UserPath]
     : "Дорогие гости!";
 
-  const dressCodeExample = ["#DDDCDB", "#B8B0A0", "#96825F", "#181818"];
-
   const scrollToSection = (ref: MutableRefObject<HTMLElement | null>) => {
     ref.current?.scrollIntoView({ behavior: "smooth" });
   };
@@ -37,8 +39,8 @@ const MainPage = (props: IProps) => {
 
     const formData = new FormData(event.target);
     const name = formData.get("name");
-    const confirm = formData.get("confirm");
-    const drink = formData.getAll("drink");
+    const confirm = formData.getAll("confirm").filter(Boolean);
+    const drink = formData.getAll("drink").filter(Boolean);
 
     try {
       setLoading(true);
@@ -59,6 +61,8 @@ const MainPage = (props: IProps) => {
 
   return (
     <div className={styles.mainPage}>
+      {muteBtn}
+
       <section className={styles.introSection}>
         <div className={styles.dateWrapper}>
           <h1 className={styles.date}>
@@ -114,7 +118,7 @@ const MainPage = (props: IProps) => {
       <section className={styles.location}>
         <div className={styles.rotatePhoto}>
           <img
-            className={styles.photo3}
+            className={styles.photo5}
             src={glass}
             alt="Пирамида шампанского"
           />
@@ -128,7 +132,7 @@ const MainPage = (props: IProps) => {
         <div className={styles.locationContent}>
           <span>Ждем вас по адресу:</span>
 
-          <span>г.Петропавловск, ул Конституции Казахстанна, 41</span>
+          <span>г.Петропавловск, ул Конституции Казахстана, 41</span>
           <span>ресторан "Brown Street"</span>
 
           <a
@@ -186,17 +190,47 @@ const MainPage = (props: IProps) => {
         </div>
 
         <div className={styles.dressCodeColors}>
-          {dressCodeExample.map((item) => (
-            <div
-              key={item}
-              className={styles.dressCodeExample}
-              style={{ background: `${item}` }}
-            />
-          ))}
+          <div
+            className={styles.dressCodeExample}
+            style={{ background: "#292929" }}
+          />
+
+          <img className={styles.dressCodeExample} src={silver} alt="silver" />
+
+          <img className={styles.dressCodeExample} src={gold} alt="gold" />
+
+          <div
+            className={styles.dressCodeExample}
+            style={{ background: "#F6F6F6" }}
+          />
         </div>
 
-        <div className={styles.rotatePhoto}>
-          <img className={styles.photo3} src={photo5} alt="Жахонгир и Ляззат" />
+        <div className={styles.dressCodeTextCaption}>
+          <span>
+            Будем признательны, если образ
+            <span className={styles.strongCaption}> «total white» </span>
+            будет только у невесты
+          </span>
+
+          <span>
+            Если Вам не к лицу не один из данных цветов, Вы можете выбрать
+            другой постельный оттенок любого цвета
+          </span>
+
+          <span>
+            Если Вам не по душе эти формальности, знайте: в чем бы Вы ни пришли,
+            мы будем рады Вас видеть!
+          </span>
+        </div>
+
+        <div className={styles.rotatePhotoWrapper}>
+          <div className={styles.rotatePhoto}>
+            <img
+              className={styles.photo5}
+              src={photo5}
+              alt="Жахонгир и Ляззат"
+            />
+          </div>
         </div>
       </section>
 
@@ -223,11 +257,13 @@ const MainPage = (props: IProps) => {
           >
             <label>
               <div className={styles.formNameWrapper}>
-                <span className={styles.formBlockTitle}>{guest}</span>
-
-                <span className={styles.formBlockCaption}>
-                  если вы будете с парой или семьей, внесите все имена, а также
-                  возраст детей
+                <span
+                  className={clsx(
+                    styles.formBlockTitle,
+                    styles.formBlockTitle_paddingBottom
+                  )}
+                >
+                  {guest}
                 </span>
 
                 <input
@@ -292,15 +328,43 @@ const MainPage = (props: IProps) => {
                   Прийти не получится
                 </span>
               </label>
+
+              <label htmlFor="4">
+                <div className={styles.formNameWrapper}>
+                  <input
+                    id="4"
+                    type="text"
+                    placeholder="Свой ответ"
+                    name="confirm"
+                    className={styles.formNameInput}
+                    autoComplete="off"
+                    disabled={loading}
+                  />
+                  <span className={styles.formNameInput__line} />
+                </div>
+              </label>
             </div>
 
             <div className={styles.formBlockWrapper}>
               <span className={styles.formBlockTitle}>Напитки</span>
 
-              <label htmlFor="4" className={styles.checkBox}>
+              <label htmlFor="5" className={styles.checkBox}>
                 <input
                   className={styles.checkBox__input}
-                  id="4"
+                  id="5"
+                  name="drink"
+                  type="checkbox"
+                  value={"Водка"}
+                  disabled={loading}
+                />
+                <span className={styles.checkBox__fake} />
+                <span className={styles.checkBox__text}>Водка</span>
+              </label>
+
+              <label htmlFor="6" className={styles.checkBox}>
+                <input
+                  className={styles.checkBox__input}
+                  id="6"
                   name="drink"
                   type="checkbox"
                   value={"Коньяк"}
@@ -310,30 +374,45 @@ const MainPage = (props: IProps) => {
                 <span className={styles.checkBox__text}>Коньяк</span>
               </label>
 
-              <label htmlFor="5" className={styles.checkBox}>
+              <label htmlFor="7" className={styles.checkBox}>
                 <input
                   className={styles.checkBox__input}
-                  id="5"
+                  id="7"
                   name="drink"
                   type="checkbox"
-                  value={"Шампанское"}
+                  value={"Виски"}
                   disabled={loading}
                 />
                 <span className={styles.checkBox__fake} />
-                <span className={styles.checkBox__text}>Шампанское</span>
+                <span className={styles.checkBox__text}>Виски</span>
               </label>
 
-              <label htmlFor="6" className={styles.checkBox}>
+              <label htmlFor="8" className={styles.checkBox}>
                 <input
                   className={styles.checkBox__input}
-                  id="6"
+                  id="8"
                   name="drink"
                   type="checkbox"
-                  value={"Шампанское"}
+                  value={"Вино"}
                   disabled={loading}
                 />
                 <span className={styles.checkBox__fake} />
-                <span className={styles.checkBox__text}>Другие напитки..</span>
+                <span className={styles.checkBox__text}>Вино</span>
+              </label>
+
+              <label htmlFor="9">
+                <div className={styles.formNameWrapper}>
+                  <input
+                    id="9"
+                    type="text"
+                    placeholder="Свой ответ"
+                    name="drink"
+                    className={styles.formNameInput}
+                    autoComplete="off"
+                    disabled={loading}
+                  />
+                  <span className={styles.formNameInput__line} />
+                </div>
               </label>
             </div>
 
@@ -358,7 +437,56 @@ const MainPage = (props: IProps) => {
         )}
       </section>
 
-      {muteBtn}
+      <section className={styles.details}>
+        <div className={styles.titleWrapper}>
+          <div className={styles.title}>Details</div>
+          <div className={clsx(styles.subtitle, styles.subtitle_special)}>
+            special
+          </div>
+        </div>
+
+        <div className={styles.detailsContent}>
+          Просим вас воздержаться от покупки цветов, скорее всего мы не сможем
+          насладиться их красотой до отъезда в свадебное путешествие
+        </div>
+
+        <div className={styles.detailsContent}>
+          Чтобы гости могли отдохнуть и повеселиться на нашем торжестве, очень
+          просим Вас приходить без маленьких детей
+        </div>
+
+        <div className={clsx(styles.title, styles.title_paddingTop)}>
+          Contacts
+        </div>
+
+        <div className={styles.detailsContent}>
+          По всем возникшим вопросам в день свадьбы, просьба обращаться к нашему
+          свадебному организатору
+        </div>
+
+        <div className={styles.detailsContent}>
+          <a href="https://wa.me/+77473748072" target="_blank" rel="noreferrer">
+            <WhatsAppIcon />
+          </a>
+
+          <a
+            href="tel:+77473748072"
+            target="_blank"
+            rel="noreferrer"
+            className={styles.locationLink}
+          >
+            +7 747 374 8072
+          </a>
+        </div>
+
+        <div className={styles.photo3Content}>
+          <img className={styles.photo3} src={photo3} alt="Жахонгир и Ляззат" />
+          <div className={styles.photo3Text}>До встречи!</div>
+          <div className={styles.photo3Caption}>
+            Музыка на фоне: Ed Sheeran Perfect
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

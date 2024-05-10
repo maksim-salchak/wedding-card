@@ -32,6 +32,13 @@
   font-weight: 300;
 }
 
+@font-face {
+  font-family: "Antarctic";
+  src: url("assets/fonts/Antarctic.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+
 * {
   box-sizing: border-box;
 }
