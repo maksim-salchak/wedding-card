@@ -121,14 +121,9 @@ const LockPanel = (props: IProps) => {
         </div>
       </div>
 
-      <video
-        src={videoBg}
-        className={style.video}
-        muted
-        loop
-        autoPlay
-        preload="auto"
-      />
+      <video className={style.video} muted loop autoPlay preload="auto">
+        <source src={videoBg} type="video/webm" />
+      </video>
     </>
   );
 };
