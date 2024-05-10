@@ -36,9 +36,9 @@
   "browserslist": {
     "production": [
       "> 5%",
-      "last 3 versions",
+      "last 5 versions",
       "IE 9",
-      "last 4 major versions"
+      "last 5 major versions"
     ],
     "development": [
       "last 1 chrome version",
