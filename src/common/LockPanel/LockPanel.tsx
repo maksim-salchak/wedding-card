@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
 import style from "./LockPanel.module.scss";
 import clsx from "clsx";
-import videoBg from "../../assets/video/video.MOV";
+import videoBg from "../../assets/video/video.webm";
 
 interface IProps {
   unlockPage: (value: boolean) => void;
@@ -121,9 +121,14 @@ const LockPanel = (props: IProps) => {
         </div>
       </div>
 
-      <video muted loop className={style.video} autoPlay preload="auto">
-        <source src={videoBg} />
-      </video>
+      <video
+        src={videoBg}
+        className={style.video}
+        muted
+        loop
+        autoPlay
+        preload="auto"
+      />
     </>
   );
 };

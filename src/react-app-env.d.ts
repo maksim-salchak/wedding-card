@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-declare module "*.MOV" {
+declare module "*.webm" {
   const src: string;
   export default src;
 }
