@@ -42,7 +42,9 @@ const App = () => {
           <MainPage muteBtn={muteBtn} />
         )}
 
-        <audio ref={audioRef} loop src={mainSong} preload="auto" />
+        <audio ref={audioRef} loop autoPlay>
+          <source src={mainSong} type={"audio/mp3"} />
+        </audio>
       </div>
     </BrowserRouter>
   );
