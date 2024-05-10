@@ -11,14 +11,15 @@ const App = () => {
   const [lock, setLock] = useState(true);
   const [mute, setMute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
+  const fakeBtn = useRef<HTMLButtonElement | null>(null);
 
   const playSong = () => {
     if (audioRef.current) audioRef.current.play();
+    if (fakeBtn.current) fakeBtn.current.click();
   };
 
   const muteSong = () => {
     if (!audioRef.current) return;
-    audioRef.current.muted = !audioRef.current.muted;
     setMute(!mute);
   };
 
@@ -42,7 +43,7 @@ const App = () => {
           <MainPage muteBtn={muteBtn} />
         )}
 
-        <audio ref={audioRef} loop autoPlay>
+        <audio ref={audioRef} loop autoPlay muted={mute}>
           <source src={mainSong} type={"audio/mp3"} />
         </audio>
       </div>
