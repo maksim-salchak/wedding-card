@@ -1,10 +1,9 @@
 import React, { useRef, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { MainPage } from "./pages";
 
 import style from "./App.module.css";
 import { LockPanel, MuteIcon, UnmuteIcon } from "common";
-import { USER_PATH_OPTIONS } from "shared";
 
 import mainSong from "./assets/audio/EdSheeranPerfect.mp3";
 
@@ -40,19 +39,7 @@ const App = () => {
             }}
           />
         ) : (
-          <Routes>
-            {USER_PATH_OPTIONS.map((item) => {
-              console.log(item);
-
-              return (
-                <Route
-                  key={item}
-                  path={item}
-                  element={<MainPage muteBtn={muteBtn} />}
-                />
-              );
-            })}
-          </Routes>
+          <MainPage muteBtn={muteBtn} />
         )}
 
         <audio ref={audioRef} loop src={mainSong} />
