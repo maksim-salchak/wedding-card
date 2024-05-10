@@ -38,12 +38,17 @@
       "> 5%",
       "last 5 versions",
       "IE 9",
-      "last 5 major versions"
+      "last 5 major versions",
+      "ios_saf >= 12",
+      "ios_saf <= 18"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "> 5%",
+      "last 5 versions",
+      "IE 9",
+      "last 5 major versions",
+      "ios_saf >= 12",
+      "ios_saf <= 18"
     ]
   }
 }
