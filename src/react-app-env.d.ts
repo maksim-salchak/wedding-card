@@ -1,6 +1,6 @@
 /// <reference types="react-scripts" />
 
-declare module "*.mp4" {
+declare module "*.MOV" {
   const src: string;
   export default src;
 }
