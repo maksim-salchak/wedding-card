@@ -9,20 +9,21 @@ import mainSong from "./assets/audio/EdSheeranPerfect.mp3";
 
 const App = () => {
   const [lock, setLock] = useState(true);
-  const [mute, setMute] = useState(true);
+  const [mute, setMute] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
-    document.body.addEventListener("mousemove", () => {
+    window.addEventListener("click", () => {
       setTimeout(() => {
         playSong();
       });
     });
+
+    document.body.onload = () => {};
   }, []);
 
   const playSong = () => {
     if (audioRef.current) audioRef.current.play();
-    setMute(!mute);
   };
 
   const muteSong = () => setMute(!mute);

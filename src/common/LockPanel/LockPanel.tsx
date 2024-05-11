@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import style from "./LockPanel.module.scss";
 import clsx from "clsx";
 import videoBg from "../../assets/video/video.mp4";
@@ -9,6 +9,15 @@ interface IProps {
 
 const LockPanel = (props: IProps) => {
   const { unlockPage } = props;
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    window.addEventListener("load", () => {
+      if (videoRef.current) {
+        videoRef.current.play();
+      }
+    });
+  }, []);
 
   const [lock, setLock] = useState(false);
 
@@ -118,7 +127,7 @@ const LockPanel = (props: IProps) => {
         </div>
       </div>
 
-      <video className={style.video} muted loop autoPlay>
+      <video ref={videoRef} className={style.video} muted loop autoPlay>
         <source src={videoBg} type="video/mp4" />
       </video>
     </>
