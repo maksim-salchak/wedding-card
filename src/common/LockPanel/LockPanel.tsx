@@ -134,7 +134,6 @@ const LockPanel = (props: IProps) => {
         loop
         autoPlay
         playsInline
-        controls
       >
         <source src={videoBg} type="video/mp4" />
       </video>
