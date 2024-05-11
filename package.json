@@ -35,20 +35,16 @@
   },
   "browserslist": {
     "production": [
-      "> 5%",
-      "last 5 versions",
+      "> 4%",
+      "last 4 versions",
       "IE 9",
-      "last 5 major versions",
-      "ios_saf >= 12",
-      "ios_saf <= 18"
+      "last 4 major versions"
     ],
     "development": [
-      "> 5%",
-      "last 5 versions",
+      "> 4%",
+      "last 4 versions",
       "IE 9",
-      "last 5 major versions",
-      "ios_saf >= 12",
-      "ios_saf <= 18"
+      "last 4 major versions"
     ]
   }
 }

@@ -5,11 +5,10 @@ import videoBg from "../../assets/video/video.mp4";
 
 interface IProps {
   unlockPage: (value: boolean) => void;
-  start: () => void;
 }
 
 const LockPanel = (props: IProps) => {
-  const { unlockPage, start } = props;
+  const { unlockPage } = props;
 
   const [lock, setLock] = useState(false);
 
@@ -35,7 +34,6 @@ const LockPanel = (props: IProps) => {
         document.addEventListener("touchmove", handleMove);
         document.addEventListener("touchend", handleEnd);
       } else {
-        start();
         dragBtn.style.transform = `translate3d(0px, 0px, 0px)`;
         document.addEventListener("mousemove", handleMove);
         document.addEventListener("mouseup", handleEnd);
@@ -90,7 +88,6 @@ const LockPanel = (props: IProps) => {
         dragBtn.style.transform = `translate3d(225px, 0px, 0px)`;
         unlockPage(false);
         setLock(true);
-        start();
       } else {
         dragBtn.style.transform = "";
       }
