@@ -12,7 +12,11 @@ const LockPanel = (props: IProps) => {
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (videoRef.current) videoRef.current.play();
+    window.addEventListener("load", () => {
+      if (videoRef.current) {
+        videoRef.current.play();
+      }
+    });
   }, []);
 
   const [lock, setLock] = useState(false);
@@ -128,8 +132,8 @@ const LockPanel = (props: IProps) => {
         className={style.video}
         muted
         loop
+        autoPlay
         playsInline
-        controls={false}
       >
         <source src={videoBg} type="video/mp4" />
       </video>
