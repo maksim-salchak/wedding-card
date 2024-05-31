@@ -247,7 +247,7 @@ const MainPage = (props: IProps) => {
         </div>
 
         <div className={styles.invitedCaption}>
-          Будем ждать ответы до 01.06.2024 г.
+          Будем ждать ответы до 20.06.2024 г.
         </div>
 
         {!sended && !error ? (
