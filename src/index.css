@@ -1,13 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap");
+@import url("assets/styles/reset.scss");
+
+@font-face {
+  font-family: "Felidae-Regular";
+  src: url("assets/fonts/felidae-regular.woff2") format("woff2"),
+    url("assets/fonts/felidae-regular.woff") format("woff");
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Сleanvertising";
+  src: url("assets/fonts/cleanvertising-light.woff2") format("woff2"),
+    url("assets/fonts/cleanvertising-light.woff") format("woff");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Karlotte";
+  src: url("assets/fonts/karlotte.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Lovers Quarrel";
+  src: url("assets/fonts/lovers_quarrel.woff2") format("woff2"),
+    url("assets/fonts/lovers_quarrel.woff") format("woff");
+  font-style: italic;
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: "Antarctic";
+  src: url("assets/fonts/Antarctic.ttf");
+  font-style: normal;
+  font-weight: 300;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }

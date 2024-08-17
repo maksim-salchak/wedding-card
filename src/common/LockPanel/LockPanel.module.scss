@@ -1,0 +1,129 @@
+@use "src/assets/styles/breakpoints.module";
+
+.lockPanel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  padding-bottom: 60px;
+
+  background: rgba(0, 0, 0, 0.45);
+}
+
+.video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -100;
+  object-fit: cover;
+}
+
+.content {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 10px;
+  color: #fff;
+
+  font-family: "Felidae-Regular";
+  font-weight: 200;
+  font-size: 48px;
+
+  @include breakpoints.mobileLargeScreen {
+    font-size: 32px;
+  }
+}
+
+.unlockMessage {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  user-select: none;
+
+  @include breakpoints.mobileLargeScreen {
+    font-size: 12px;
+  }
+}
+
+.drag {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 280px;
+  height: 60px;
+
+  &_blur {
+    animation: blur 2.5s forwards;
+    opacity: 0;
+  }
+}
+
+.dragButton {
+  position: absolute;
+  touch-action: pan-y;
+  height: 36px;
+  cursor: grab;
+  z-index: 10;
+  user-select: none;
+
+  &:before,
+  &:after {
+    position: absolute;
+    content: "";
+    left: 25px;
+    top: 0;
+    width: 25px;
+    height: 40px;
+    background: rgb(255, 255, 255);
+    border-radius: 25px 25px 0 0;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+  }
+
+  &:after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+  }
+}
+
+.dragging {
+  cursor: grabbing;
+}
+
+.dragLine {
+  margin: auto;
+  width: 150px;
+  height: 1px;
+  margin-right: 12px;
+
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 33%,
+    rgba(255, 255, 255, 0) 0%
+  );
+  background-size: 10px 1px;
+  background-repeat: repeat-x;
+}
+
+.dropZone {
+  width: 60px;
+  height: 60px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+}
+
+@keyframes blur {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}

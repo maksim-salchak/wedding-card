@@ -1,0 +1,56 @@
+$desktopScreen: 1600px;
+$laptopScreen: 1440px;
+$tabletLandscapeScreen: 1024px;
+$tabletPortraitScreen: 640px;
+$mobileLargeScreen: 480px;
+$mobileSmallScreen: 375px;
+
+@mixin desktopScreen() {
+  @media screen and (max-width: $desktopScreen) {
+    @content;
+  }
+}
+
+@mixin laptopScreen() {
+  @media screen and (max-width: $laptopScreen) {
+    @content;
+  }
+}
+
+@mixin tabletLandscapeScreen() {
+  @media screen and (max-width: $tabletLandscapeScreen) {
+    @content;
+  }
+}
+
+@mixin tabletPortraitScreen() {
+  @media screen and (max-width: $tabletPortraitScreen) {
+    @content;
+  }
+}
+
+@mixin mobileLargeScreen() {
+  @media screen and (max-width: $mobileLargeScreen) {
+    @content;
+  }
+}
+@mixin mobileSmallScreen() {
+  @media screen and (max-width: $mobileSmallScreen) {
+    @content;
+  }
+}
+
+@mixin customScreenWidth($screenWidth) {
+  @media screen and (max-width: $screenWidth) {
+    @content;
+  }
+}
+
+:export {
+  desktopScreen: $desktopScreen;
+  laptopScreen: $laptopScreen;
+  tabletLandscapeScreen: $tabletLandscapeScreen;
+  tabletPortraitScreen: $tabletPortraitScreen;
+  mobileLargeScreen: $mobileLargeScreen;
+  mobileSmallScreen: $mobileSmallScreen;
+}
